@@ -99,6 +99,7 @@ fs.exists('./plugins/index.js', function(exists) {
   }
 });
 
-var port = process.env.PORT || config.server.port;
-server.listen(port);
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || config.server.port;
+var ip = process.env.OPENSHIFT_INTERNAL_IP || config.server.ip;
+server.listen(port, ip);
 console.log("Express server listening on port %d in %s mode", port, app.settings.env);
